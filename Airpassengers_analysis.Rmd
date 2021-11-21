@@ -1,0 +1,69 @@
+``````{r }
+library(ggfortify)
+library(tseries)
+library(forecast)
+```
+
+``````{r }
+data(AirPassengers)
+AP <- AirPassengers
+# Take a look at the class of the dataset AirPassengers
+class(AP)
+```
+
+``````{r }
+AP
+
+```
+``````{r }
+sum(is.na(AP))
+
+```
+``````{r }
+frequency(AP)
+
+```
+``````{r }
+cycle(AP)
+
+
+```
+
+``````{r }
+summary(AP)
+
+```
+``````{r }
+plot(AP,xlab="Date", ylab = "Passenger numbers (1000's)",main="Air Passenger numbers from 1949 to 1961")
+
+```
+
+``````{r }
+
+autoplot(AP) + labs(x ="Date", y = "Passenger numbers (1000's)", title="Air Passengers from 1949 to 1961") 
+
+```
+
+
+
+``````{r }
+plot(AirPassengers)+abline(reg=lm(AirPassengers~time(AirPassengers))) 
+
+```
+``````{r }
+plot(diff(log(AirPassengers))) 
+
+```
+``````{r }
+plot(aggregate(AirPassengers,FUN = mean))
+
+```
+
+``````{r }
+boxplot(AP~cycle(AP),xlab="Date", ylab = "Passenger Numbers (1000's)" ,main ="Monthly Air Passengers Boxplot from 1949 to 1961")
+```
+
+``````{r }
+AP.decompM <- decompose(AP, type = "multiplicative")
+plot(AP.decompM)
+```
